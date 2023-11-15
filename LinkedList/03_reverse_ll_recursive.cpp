@@ -29,15 +29,19 @@ public:
 
 
 
-Node* reverseLinkedList(Node *head) {
-    Node *prev=NULL;
-    Node *curr=head;
-    Node *nxt=NULL;
-    while(curr) {
-        nxt=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=nxt;
+Node* reverseLL(Node* current, Node* prev) {
+    if (current) {
+        Node* next = current->next;
+        current->next = prev;
+        return reverseLL(next, current);
     }
-    return prev;
+    return prev;  
+}
+
+
+Node* reverseLinkedList(Node* head) {
+    Node* curr = head;
+    Node* prev = NULL;
+    prev = reverseLL(curr, prev);
+    return prev;  
 }
